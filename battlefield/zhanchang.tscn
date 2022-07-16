@@ -1,0 +1,115 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://battlefield/awd.gd" type="Script" id=1]
+[ext_resource path="res://sentry/F.tscn" type="PackedScene" id=2]
+[ext_resource path="res://battlefield/UI_of_plant.gd" type="Script" id=3]
+[ext_resource path="res://battlefield/main.gd" type="Script" id=4]
+[ext_resource path="res://battlefield/Label2.gd" type="Script" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://zidan.tscn" type="PackedScene" id=7]
+[ext_resource path="res://battlefield/enemy_x.gd" type="Script" id=8]
+[ext_resource path="res://battlefield/enemy_Z.gd" type="Script" id=9]
+[ext_resource path="res://battlefield/enemy_y.gd" type="Script" id=10]
+[ext_resource path="res://battlefield/UI.gd" type="Script" id=11]
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="哨兵" parent="." instance=ExtResource( 2 )]
+script = ExtResource( 1 )
+
+[node name="观察点" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.966708, 0.255884, 0, -0.255884, 0.966708, 0.303958, 1.05234, 1.79536 )
+current = true
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 11 )
+
+[node name="Label" type="Label" parent="UI"]
+margin_right = 129.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "The rotation of pitch"
+script = ExtResource( 3 )
+
+[node name="Label2" type="Label" parent="UI"]
+margin_top = 14.0
+margin_right = 139.0
+margin_bottom = 36.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+script = ExtResource( 5 )
+
+[node name="Button" type="Button" parent="UI"]
+margin_left = 616.0
+margin_top = 8.0
+margin_right = 628.0
+margin_bottom = 28.0
+rect_scale = Vector2( 0.977991, 1.01079 )
+icon = ExtResource( 6 )
+
+[node name="enemy_x" type="TextEdit" parent="UI" groups=["set_the_point"]]
+margin_left = 20.0
+margin_top = 70.0
+margin_right = 80.0
+margin_bottom = 90.0
+text = "-4"
+script = ExtResource( 8 )
+
+[node name="enemy_y" type="TextEdit" parent="UI" groups=["set_the_point"]]
+margin_left = 20.0
+margin_top = 90.0
+margin_right = 80.0
+margin_bottom = 110.0
+text = "-3"
+script = ExtResource( 10 )
+
+[node name="enemy_Z" type="TextEdit" parent="UI" groups=["set_the_point"]]
+margin_left = 20.0
+margin_top = 110.0
+margin_right = 80.0
+margin_bottom = 130.0
+text = "-5"
+script = ExtResource( 9 )
+
+[node name="Label3" type="Label" parent="UI"]
+margin_left = 5.0
+margin_top = 70.0
+margin_right = 25.0
+margin_bottom = 90.0
+custom_colors/font_color = Color( 0.498039, 0.0313726, 0.160784, 1 )
+text = "X"
+
+[node name="Label5" type="Label" parent="UI"]
+margin_left = 5.0
+margin_top = 110.0
+margin_right = 25.0
+margin_bottom = 130.0
+custom_colors/font_color = Color( 0.0235294, 0.301961, 0.231373, 1 )
+text = "Z"
+
+[node name="Label4" type="Label" parent="UI"]
+margin_left = 5.0
+margin_top = 90.0
+margin_right = 25.0
+margin_bottom = 110.0
+custom_colors/font_color = Color( 0.0588235, 0.0392157, 0.415686, 1 )
+text = "y"
+
+[node name="Button2" type="Button" parent="UI"]
+margin_left = 14.0
+margin_top = 133.0
+margin_right = 96.0
+margin_bottom = 153.0
+text = "set_enemy"
+
+[node name="Spatial" parent="." instance=ExtResource( 7 )]
+
+[connection signal="gun_xyz" from="哨兵" to="UI/Label2" method="_on__gun_xyz"]
+[connection signal="plant_xyz" from="哨兵" to="UI/Label" method="_on__plant_xyz"]
+[connection signal="button_down" from="UI/Button" to="哨兵" method="_on_Button_button_down"]
+[connection signal="put_the_enemy_x" from="UI/enemy_x" to="哨兵" method="_on_enemy_x_put_the_enemy_x"]
+[connection signal="put_the_enemy_y" from="UI/enemy_y" to="哨兵" method="_on_enemy_y_put_the_enemy_y"]
+[connection signal="put_the_enemy_z" from="UI/enemy_Z" to="哨兵" method="_on_enemy_Z_put_the_enemy_z"]
+[connection signal="pressed" from="UI/Button2" to="UI" method="_on_Button2_pressed"]

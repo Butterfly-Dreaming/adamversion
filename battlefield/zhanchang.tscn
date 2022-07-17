@@ -104,7 +104,7 @@ margin_right = 96.0
 margin_bottom = 153.0
 text = "set_enemy"
 
-[node name="Spatial" parent="." instance=ExtResource( 7 )]
+[node name="point" parent="." instance=ExtResource( 7 )]
 
 [connection signal="gun_xyz" from="哨兵" to="UI/Label2" method="_on__gun_xyz"]
 [connection signal="plant_xyz" from="哨兵" to="UI/Label" method="_on__plant_xyz"]

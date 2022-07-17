@@ -43,14 +43,11 @@ func _on_Button_button_down():
 	###########
 	print(PNP_TO)
 	print(plant.rotation)
-	
+	print(plant.rotation_degrees)
 	   
 	var R1 = Vector3(-yaw,pitch,0)
 
 	plant.set_rotation(R1)
-
-	
-
 
 func _on_enemy_x_put_the_enemy_x(x):
 	enemy.x=x as float

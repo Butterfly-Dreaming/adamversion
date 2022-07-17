@@ -31,13 +31,16 @@ func _physics_process(delta):
 	if Input.is_action_pressed("move_b"):
 		translation.y -= 0.05
 func _on_Button_button_down():
+	## 能得到的是目标点在相机坐标系下的坐标（PNP）
 	var PnP_point =to_local(enemy)#
 	var PNP_TO = plant.Return_xyz(enemy)
 	
 	#得到云台坐标系的点
 	#从枪坐标转为云台坐标
+	####
 	var pitch = atan(PnP_point.x/PnP_point.z)
 	var yaw = atan(PnP_point.y*cos(pitch)/PnP_point.z)
+	###########
 	print(PNP_TO)
 	print(plant.rotation)
 	

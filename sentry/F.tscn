@@ -22,6 +22,9 @@ __meta__ = {
 
 [node name="枪的第二次转动" type="Spatial" parent="枪的第一次转动"]
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "该点已废弃"
+}
 
 [node name="camera" type="Camera" parent="枪的第一次转动/枪的第二次转动"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -1 )

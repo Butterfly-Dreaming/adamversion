@@ -9,7 +9,7 @@ signal plant_xyz(point)
 signal gun_xyz(point)
 onready var plant = get_node("枪的第一次转动")#控制轴1
 onready var gun = get_node("枪的第一次转动/枪的第二次转动")#控制轴2
-var enemy=Vector3(-2,-1,-3)#敌人的坐标
+var enemy=Vector3(-1,-1,-1)#敌人的坐标
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -32,15 +32,19 @@ func _physics_process(delta):
 		translation.y -= 0.05
 func _on_Button_button_down():
 	var PnP_point =to_local(enemy)
+	var PNP_TO = plant.Return_xyz(enemy)
+	
 	#得到云台坐标系的点
-	var yaw = atan(PnP_point.y/PnP_point.z)
+	var pitch = atan(PnP_point.x/PnP_point.z)
+	var yaw = atan(PnP_point.y*cos(pitch)/PnP_point.z)
+	print(PNP_TO)
+	print(plant.rotation)
 	
-	var pitch = asin(PnP_point.x/sqrt(PnP_point.dot(PnP_point)))
 	
-	var R1 = Vector3(-yaw,0,0)
-	var R2 = Vector3(0,-pitch,0)
+	var R1 = Vector3(-yaw,pitch,0)
+
 	plant.set_rotation(R1)
-	gun.set_rotation(R2)
+
 	
 
 

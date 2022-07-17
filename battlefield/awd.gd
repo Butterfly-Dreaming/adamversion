@@ -21,8 +21,17 @@ func _process(delta):
 	emit_signal("gun_xyz",point_gun)
 
 #旋转方式
+func _physics_process(delta):
+	if Input.is_action_pressed("move_r"):
+		translation.x += 0.05
+	if Input.is_action_pressed("move_l"):
+		translation.x -= 0.05
+	if Input.is_action_pressed("move_f"):
+		translation.y += 0.05
+	if Input.is_action_pressed("move_b"):
+		translation.y -= 0.05
 func _on_Button_button_down():
-	var PnP_point = gun.Return_xyz(enemy)
+	var PnP_point =to_local(enemy)
 	#得到云台坐标系的点
 	var yaw = atan(PnP_point.y/PnP_point.z)
 	

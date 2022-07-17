@@ -32,22 +32,22 @@ func _physics_process(delta):
 		translation.y -= 0.05
 func _on_Button_button_down():
 	## 能得到的是目标点在相机坐标系下的坐标（PNP）
-	var PnP_point =to_local(enemy)#
+	var PnP_point =to_local(enemy)#直接就是云台坐标系中 敌人的坐标
 	var PNP_TO = plant.Return_xyz(enemy)
 	
 	#得到云台坐标系的点
 	#从枪坐标转为云台坐标
 	####
-	var pitch = atan(PnP_point.x/PnP_point.z)
+	var pitch = atan(PnP_point.x/PnP_point.z) #pitch 电控的同学设置的pith轴的值
 	var yaw = atan(PnP_point.y*cos(pitch)/PnP_point.z)
 	###########
 	print(PNP_TO)
 	print(plant.rotation)
 	print(plant.rotation_degrees)
-	   
-	var R1 = Vector3(-yaw,pitch,0)
+	   #############################
+	var R1 = Vector3(-yaw,pitch,0)#设置
 
-	plant.set_rotation(R1)
+	plant.set_rotation(R1)#电控的达瓦里说给的API
 
 func _on_enemy_x_put_the_enemy_x(x):
 	enemy.x=x as float
